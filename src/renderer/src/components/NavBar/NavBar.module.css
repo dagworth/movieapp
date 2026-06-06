@@ -1,0 +1,30 @@
+.nav{
+  display: flex;
+  /* vertical center */
+  align-items: center;
+  /* horizontal center */
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  background-color: #91919128;
+  padding: 20px 0;
+}
+
+.button {
+  background-color: #2f5550;
+  font-size: 20px;
+  color: #c1c1c1;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.1s ease-in-out;
+  transform: scale(1);
+}
+
+.activeButton {
+  transform: scale(1.1);
+  background-color: #5daca2;
+  color: rgb(28, 28, 28);
+}

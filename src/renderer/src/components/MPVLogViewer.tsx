@@ -4,13 +4,11 @@ export function MPVLogViwer() {
     const [logs, setLogs] = useState<string[]>([]);
 
     useEffect(() => {
-        // Register the listener and store the cleanup function
+        // register the listener and store the cleanup function
         const unsubscribe = window.api.onLog((newLog) => {
             setLogs((prev) => [...prev, newLog]);
         });
-
-        // Cleanup on unmount
-        return () => unsubscribe();
+        return () => unsubscribe(); //cleanup when unmount
     }, []);
 
     return (

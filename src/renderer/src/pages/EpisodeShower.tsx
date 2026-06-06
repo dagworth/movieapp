@@ -38,7 +38,6 @@ export function EpisodeShower(){
     return (
         <div>
             <button onClick={() => setPage('finder')}>Back</button>
-            <p>If you press an episode button and it takes longer than like 20 seconds to load, probably tell me with the anime name and episode</p>
 
             <div style={{
                 display: 'grid',

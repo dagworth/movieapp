@@ -1,27 +1,18 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./renderer/assets/Montserrat-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
-    background-color: #515151;
-    color: white;
-    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Montserrat-Bold';
 }
 
-input::placeholder {
-    color: #ffffff;
-    opacity: .5;
-}
-
-.episodeButton {
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    background-color: #b962c1;
-    color: white;
-    border: none;
-    transition: all 0.25s ease-in-out;
-}
-
-.episodeButton:hover {
-    background-color: #bb1cb0;
-    transform: translateY(-5px);
+body {
+  background-color: #383c3b;
 }

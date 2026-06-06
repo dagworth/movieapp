@@ -10,4 +10,4 @@ declare global {
     interface Window {
         api: IElectronAPI;
     }
-}1
+}

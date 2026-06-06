@@ -78,7 +78,7 @@ export async function getEpisodeData(showId: string, episodeString: string | num
             }, { headers });
             responseData = postResp.data;
         } catch (e) {
-            console.error("both get and post failed");
+            logger!(`both get and post failed, plz tell me and also screenshot the logs`);
             return [];
         }
     }
@@ -96,7 +96,7 @@ export async function getEpisodeData(showId: string, episodeString: string | num
             const parsed = JSON.parse(cleanStr);
             sources = parsed.episode?.sourceUrls || parsed.data?.episode?.sourceUrls || parsed.sourceUrls || [];
         } catch (e) {
-            console.error("failed parsing: ", decrypted);
+            logger!(`failed parsing target payload, probably also screenshot and send to me`);
             return [];
         }
     }
@@ -140,7 +140,7 @@ export async function getEpisodeData(showId: string, episodeString: string | num
                     });
                 }
             } catch (err) {
-                console.error("failed to scrape mp4 upload");
+                logger!(`failed to scrape mp4upload`);
             }
             continue;
         }
@@ -177,7 +177,7 @@ export async function getEpisodeData(showId: string, episodeString: string | num
                 }
             }
         } catch (err: any) {
-            logger!(`Failed parsing stream array for ${sourceName}`);
+            logger!(`failed parsing stream for ${sourceName}`);
         }
     }
 

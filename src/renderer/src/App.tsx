@@ -1,6 +1,7 @@
 import { useState, createContext } from 'react';
 import { MediaFinder } from './pages/MediaFinder';
 import { EpisodeShower } from './pages/EpisodeShower';
+import { NavBar } from './components/NavBar/NavBar';
 
 export const context = createContext({
   page: 'finder',
@@ -16,6 +17,7 @@ function App() {
   return (
     <div>
       <context.Provider value={{ page, setPage, animeId, setAnimeId}}>
+        <NavBar/>
         {page === 'finder' && <MediaFinder/>}
         {page === 'episodes' && <EpisodeShower/>}
       </context.Provider>

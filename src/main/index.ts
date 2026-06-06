@@ -48,7 +48,6 @@ app.whenReady().then(() => {
   ipcMain.handle('api-get-anime-video', async (event, a, b) => {
     const webContents = event.sender;
     
-    // Pass a logger function that sends strings to the renderer
     const logger = (msg: string) => {
         webContents.send('mpv-log', msg);
     };
