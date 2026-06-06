@@ -1,6 +1,6 @@
 import { useState, createContext } from 'react';
 import { MediaFinder } from './pages/MediaFinder';
-import { EpisodeShower } from './pages/EpisodeShower';
+import { EpisodeSelector } from './pages/EpisodeSelector/EpisodeSelector';
 import { NavBar } from './components/NavBar/NavBar';
 
 export const context = createContext({
@@ -8,18 +8,21 @@ export const context = createContext({
   setPage: (_p: string) => {},
   animeId: null,
   setAnimeId: (_a: any) => {},
+  animeName: "",
+  setAnimeName: (_a: string) => {},
 });
 
 function App() {
   const [page, setPage] = useState('finder');
   const [animeId, setAnimeId] = useState(null);
+  const [animeName, setAnimeName] = useState('');
 
   return (
     <div>
-      <context.Provider value={{ page, setPage, animeId, setAnimeId}}>
+      <context.Provider value={{ page, setPage, animeId, setAnimeId, animeName, setAnimeName}}>
         <NavBar/>
         {page === 'finder' && <MediaFinder/>}
-        {page === 'episodes' && <EpisodeShower/>}
+        {page === 'episodes' && <EpisodeSelector/>}
       </context.Provider>
     </div>
   )

@@ -1,0 +1,19 @@
+.episodeContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(100px,1fr));
+    gap: 10px;
+    padding: 20px;
+}
+
+.episodeButton {
+  background-color: #2f5550;
+  font-size: 20px;
+  color: #c1c1c1;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.1s ease-in-out;
+  transform: scale(1);
+}

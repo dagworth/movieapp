@@ -28,7 +28,7 @@
   box-sizing: border-box;
 }
 
-.epCount, .score {
+.episodes, .score {
   background-color: rgba(13, 52, 41, 0.9);
   color: rgb(255, 255, 255);
   padding: 4px 8px;

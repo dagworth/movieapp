@@ -5,21 +5,22 @@ export default function AnimeSearchBar({setResults}) {
     const [query, setQuery] = useState('');
 
     useEffect(() => {
-        const last = localStorage.getItem('last_search');
-        if (last) {
-            setQuery(last);
-            const performInitialSearch = async () => {
-                const data = await window.api.api_searchAnime(last);
-                setResults(data);
-            };
-            
-            performInitialSearch();
+        const l = localStorage.getItem('last_search');
+        const lr = localStorage.getItem('last_search_results');
+        if(l)setQuery(l);
+        if (lr) {
+            try {
+                setResults(JSON.parse(lr));
+            } catch (e) {
+                console.error("bad json")
+            }
         }
     }, []);
 
     const handleSearch = async () => {
-        localStorage.setItem('last_search', query);
         const data = await window.api.api_searchAnime(query);
+        localStorage.setItem('last_search', query);
+        localStorage.setItem('last_search_results', JSON.stringify(data));
         setResults(data); 
     };
 

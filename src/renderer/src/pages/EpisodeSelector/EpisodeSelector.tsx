@@ -1,9 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
-import { context } from '../App';
-import { MPVLogViwer } from '../components/MPVLogViewer'
+import { context } from '../../App';
+import { MPVLogViwer } from '../../components/MPVLogViewer'
 
-export function EpisodeShower(){
-    const { animeId, setPage } = useContext(context);
+import styles from './EpisodeSelector.module.css'
+
+export function EpisodeSelector(){
+    const { animeId, animeName } = useContext(context);
     const [ animeEpisodes, setAnimeEpisodes ] = useState([]);
 
     async function playAnime(episodeId) {
@@ -37,16 +39,11 @@ export function EpisodeShower(){
 
     return (
         <div>
-            <button onClick={() => setPage('finder')}>Back</button>
-
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))',
-                gap: '10px',
-                padding: '20px' }}>
+            <p>{animeName}</p>
+            <div className={styles.episodeContainer}>
                 {animeEpisodes.length > 0 ? (
                     animeEpisodes.map((ep: any) => (
-                        <button className="episodeButton" onClick={() => playAnime(ep)}>
+                        <button className={styles.episodeButton} onClick={() => playAnime(ep)}>
                             Episode {ep}
                         </button>
                     ))

@@ -4,7 +4,7 @@ import styles from './AnimeBox.module.css';
 
 export function AnimeBox({anime}){
     const [imgSrc, setImgSrc] = useState(anime.thumbnail);
-    const { setPage, setAnimeId } = useContext(context);
+    const { setPage, setAnimeId, setAnimeName } = useContext(context);
 
     useEffect(() => {
         if(anime.thumbnail.startsWith('mc')){
@@ -15,8 +15,9 @@ export function AnimeBox({anime}){
     }, [anime.thumbnail]);
 
     async function selectAnime(){
-        setPage?.('episodes')
-        setAnimeId?.(anime._id)
+        setPage('episodes')
+        setAnimeId(anime._id)
+        setAnimeName(anime.name)
     }
 
     return (
@@ -24,7 +25,7 @@ export function AnimeBox({anime}){
             <div className={styles.imageWrapper}>
                 <img className={styles.img} src={imgSrc} alt={anime.name} onClick={() => selectAnime()}/>
                 <div className={styles.overlay}>
-                    <span className={styles.epCount}>Ep {anime.availableEpisodes.sub}</span>
+                    <span className={styles.episodes}>Ep {anime.availableEpisodes.sub}</span>
                     <span className={styles.score}>☆{anime.score}</span>
                 </div>
             </div>
