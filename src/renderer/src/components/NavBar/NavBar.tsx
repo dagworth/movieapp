@@ -1,21 +1,25 @@
-import { useContext } from 'react';
-import { context } from '../../App';
-import styles from './NavBar.module.css';
+import { useContext } from 'react'
+import { context } from '../../App'
+import styles from './NavBar.module.css'
 
 export function NavBar() {
-  const { page, setPage } = useContext(context);
+  const { page, setPage } = useContext(context)
 
   return (
     <nav className={styles.nav}>
       <button
-        className={`${styles.button} ${page === 'finder' ? styles.activeButton : ''}`}
-        onClick={() => setPage('finder')}
-      >Finder</button>
+        className={`${styles.button} ${page === 'search' ? styles.activeButton : ''}`}
+        onClick={() => setPage('search')}
+      >
+        Search
+      </button>
 
       <button
-        className={`${styles.button} ${page === 'following' ? styles.activeButton : ''}`}
-        onClick={() => setPage('following')}
-      >Following</button>
+        className={`${styles.button} ${page === 'saved' ? styles.activeButton : ''}`}
+        onClick={() => setPage('saved')}
+      >
+        Saved
+      </button>
     </nav>
-  );
+  )
 }

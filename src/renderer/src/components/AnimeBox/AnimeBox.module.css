@@ -1,8 +1,8 @@
 .container {
-    width: 250px;
-    height: 456px;
-    display: flex;
-    flex-direction: column;
+  width: 250px;
+  height: 456px;
+  display: flex;
+  flex-direction: column;
 }
 
 .img {
@@ -28,7 +28,8 @@
   box-sizing: border-box;
 }
 
-.episodes, .score {
+.episodes,
+.score {
   background-color: rgba(13, 52, 41, 0.9);
   color: rgb(255, 255, 255);
   padding: 4px 8px;
@@ -43,9 +44,9 @@
   text-align: center;
   font-weight: bold;
   font-size: 1.15rem;
-  color:white;
+  color: white;
 }
 
 .img:hover {
-  box-shadow: 0 10px 20px rgba(0, 255, 195, 0.4); /* Adds depth */
+  box-shadow: 0 10px 20px rgba(0, 255, 195, 0.2);
 }

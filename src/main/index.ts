@@ -2,7 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { is } from '@electron-toolkit/utils'
 import { getEpisodesList, searchAnime, getEpisodeData } from './allanime'
-import { spawn } from 'child_process';
+import { spawn } from 'child_process'
 
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
@@ -40,67 +40,68 @@ function createWindow(): void {
 
 app.whenReady().then(() => {
   ipcMain.handle('api-search-anime', async (_event, query) => {
-    return await searchAnime(query);
-  });
+    return await searchAnime(query)
+  })
   ipcMain.handle('api-get-anime-episode-list', async (_event, query) => {
-    return await getEpisodesList(query);
-  });
+    return await getEpisodesList(query)
+  })
   ipcMain.handle('api-get-anime-video', async (event, a, b) => {
-    const webContents = event.sender;
-    
+    const webContents = event.sender
+
     const logger = (msg: string) => {
-        webContents.send('mpv-log', msg);
-    };
+      webContents.send('mpv-log', msg)
+    }
 
-    return await getEpisodeData(a,b,logger);
-  });
+    return await getEpisodeData(a, b, logger)
+  })
   ipcMain.handle('launch-mpv', async (event, input) => {
-    const webContents = event.sender;
-    let videoUrl = input;
-    let referrer = ""; 
+    const webContents = event.sender
+    let videoUrl = input
+    let referrer = ''
 
-
-    if (videoUrl.includes("mp4upload.com")) {
-        referrer = "https://www.mp4upload.com";
-    } else if (videoUrl.includes("sharepoint")) {
-        referrer = ""; //they block any referrers
+    if (videoUrl.includes('mp4upload.com')) {
+      referrer = 'https://www.mp4upload.com'
+    } else if (videoUrl.includes('sharepoint')) {
+      referrer = '' //they block any referrers
     } else {
-        referrer = "https://youtu-chan.com"; //for ani-cli
+      referrer = 'https://youtu-chan.com' //for ani-cli
     }
 
     const mpv_args = [
-      '--fs', 
+      '--fs',
       '--hwdec=auto', //gpu does decoding
       '--vo=gpu', //gpu rendering
       '--cache=yes', //mpv caching
       '--demuxer-max-bytes=500M' //buffer size of 500mb, idk if needed
-    ];
+    ]
 
     //regex woo
     if (/\.(mp4|mkv|m3u8|mov|webm)(\?.*)?$/i.test(videoUrl)) {
-        mpv_args.push('--ytdl=no');
+      mpv_args.push('--ytdl=no')
     }
 
     if (referrer) {
-        mpv_args.push(`--referrer=${referrer}`);
+      mpv_args.push(`--referrer=${referrer}`)
     }
 
-    mpv_args.push(`--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36`);
+    mpv_args.push(
+      `--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36`
+    )
 
-    console.log(`Launching mpv with arguments: ${mpv_args.join(' ')} ${videoUrl}`);
-    const player = spawn('mpv', [...mpv_args, videoUrl]);
+    console.log(`Launching mpv with arguments: ${mpv_args.join(' ')} ${videoUrl}`)
+    const player = spawn('mpv', [...mpv_args, videoUrl])
 
     player.stdout.on('data', (data) => {
-      webContents.send('mpv-log', `[mpv stdout]: ${data.toString().trim()}`);
-    });
+      webContents.send('mpv-log', `[mpv stdout]: ${data.toString().trim()}`)
+    })
 
     player.stderr.on('data', (data) => {
-      webContents.send('mpv-log', `[mpv stderr]: ${data.toString().trim()}`);
-    });
-    
+      webContents.send('mpv-log', `[mpv stderr]: ${data.toString().trim()}`)
+    })
+
     player.on('close', (code) => {
-      webContents.send('mpv-log', `[mpv close]: Process closed with code ${code}`);
-    });
-  });
+      webContents.send('mpv-log', `[mpv close]: Process closed with code ${code}`)
+    })
+  })
   createWindow()
 })
