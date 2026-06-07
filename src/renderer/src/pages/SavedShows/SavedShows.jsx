@@ -1,5 +1,3 @@
-export function SavedShows(){
-    return (
-        <p>saaved stuff</p>
-    )
+export function SavedShows() {
+  return <p>saaved stuff</p>
 }

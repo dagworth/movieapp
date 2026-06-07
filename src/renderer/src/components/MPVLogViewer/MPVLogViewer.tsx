@@ -3,7 +3,7 @@ import styles from './MPVLogViewer.module.css'
 
 export function MPVLogViwer() {
   const [logs, setLogs] = useState<string[]>([])
-  const scroll = useRef<HTMLDivElement>(null);
+  const scroll = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const unsubscribe = window.api.onLog((newLog) => {
@@ -14,9 +14,9 @@ export function MPVLogViwer() {
 
   useEffect(() => {
     if (scroll.current) {
-      scroll.current.scrollTop = scroll.current.scrollHeight;
+      scroll.current.scrollTop = scroll.current.scrollHeight
     }
-  }, [logs]);
+  }, [logs])
 
   return (
     <div className={styles.console} ref={scroll}>
