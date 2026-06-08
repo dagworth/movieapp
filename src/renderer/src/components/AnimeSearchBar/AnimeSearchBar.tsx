@@ -19,6 +19,7 @@ export default function AnimeSearchBar({ setResults }) {
 
   const handleSearch = async () => {
     const data = await window.api.api_searchAnime(query)
+    console.log(data)
     localStorage.setItem('last_search', query)
     localStorage.setItem('last_search_results', JSON.stringify(data))
     setResults(data)

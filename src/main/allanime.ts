@@ -170,7 +170,6 @@ export async function getEpisodeData(
       continue
     }
 
-    // --- HOST C: Internal Clock Endpoints (Wixmp, Sharepoint, Default, etc) ---
     try {
       const fullUrl = finalUrl.startsWith('http') ? finalUrl : `https://${ALLANIME_BASE}${finalUrl}`
       const linkResponse = await axios.get(fullUrl, { headers })
@@ -199,7 +198,6 @@ export async function getEpisodeData(
 }
 
 export async function getEpisodesList(showId: string) {
-  // 1. Define the specific query that requests only the episodes for a showId
   const query = `
         query ($showId: String!) {
             show(_id: $showId) {
@@ -224,8 +222,6 @@ export async function getEpisodesList(showId: string) {
   try {
     const response = await axios.post('https://api.allanime.day/api', payload, { headers })
 
-    // 2. Access the data correctly based on the response structure
-    // Note: The API returns data.show.availableEpisodesDetail
     const data = response.data?.data?.show?.availableEpisodesDetail
 
     if (!data) {
@@ -233,7 +229,6 @@ export async function getEpisodesList(showId: string) {
       return null
     }
 
-    // Return the 'sub' or 'dub' list as needed
     return data.sub
   } catch (e) {
     console.error('could not fetch episodes: ', e)

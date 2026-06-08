@@ -8,11 +8,16 @@ import styles from './EpisodeSelector.module.css'
 import { useFavorites } from '@renderer/hooks/useFavorites'
 
 export function EpisodeSelector() {
-  const { animeId, animeName, setPage } = useContext(context)
+  const { animeId, animeName, animeImage, animeEnded, setPage } = useContext(context)
   const [animeEpisodes, setAnimeEpisodes] = useState<any>([])
   const [logview, setLogView] = useState<boolean>(true)
   const { watched, markWatched, markUnwatch } = useWatchedEpisodes(animeId!)
-  const { favorite, toggleFavorite } = useFavorites(animeId!)
+  const { favorite, toggleFavorite } = useFavorites({
+    id: animeId!,
+    name: animeName!,
+    ended: animeEnded,
+    image: animeImage
+  });
 
   useEffect(() => {
     const l = localStorage.getItem('log_toggle')
@@ -20,18 +25,18 @@ export function EpisodeSelector() {
   }, [])
 
   async function playAnime(episodeId) {
-    const streamData = await window.api.api_getAnimeVideo(animeId!, episodeId)
+    const sources = await window.api.api_getAnimeVideo(animeId!, episodeId)
 
-    const playableSource =
-      streamData.find((s) => s.isM3U8) || // m3u8 priority
-      streamData.find((s) => s.provider === 'S-mp4') || // fast internal mirrors
-      streamData.find((s) => s.provider === 'Yt-mp4') || //dnld source
-      streamData[0]
+    const best =
+      sources.find((s) => s.isM3U8) || // m3u8 priority
+      sources.find((s) => s.provider === 'S-mp4') || // fast internal mirrors
+      sources.find((s) => s.provider === 'Yt-mp4') || //dnld source
+      sources[0]
 
-    if (playableSource?.sourceUrl) {
-      window.api.api_launchPlayer(playableSource.sourceUrl)
+    if (best?.sourceUrl) {
+      window.api.api_launchPlayer(best.sourceUrl)
     } else {
-      console.log('no source :(')
+      console.log('source sucks')
     }
   }
 
@@ -78,6 +83,7 @@ export function EpisodeSelector() {
         {animeEpisodes.length > 0 ? (
           animeEpisodes.map((ep: any) => (
             <button
+              key={ep}
               className={`${styles.episodeButton} ${watched[ep] ? styles.watched : ''}`}
               onClick={() => {
                 playAnime(ep)
