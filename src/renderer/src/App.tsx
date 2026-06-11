@@ -14,6 +14,8 @@ export const context = createContext({
   setAnimeName: (_a: string) => {},
   animeImage: '',
   setAnimeImage: (_a: string) => {},
+  animeMaxEps: -1,
+  setAnimeMaxEps: (_a: number) => {},
   animeEnded: false,
   setAnimeEnded: (_a: boolean) => {},
 })
@@ -23,12 +25,13 @@ function App() {
   const [animeId, setAnimeId] = useState(null)
   const [animeName, setAnimeName] = useState('')
   const [animeImage, setAnimeImage] = useState('')
+  const [animeMaxEps, setAnimeMaxEps] = useState(-1)
   const [animeEnded, setAnimeEnded] = useState(false)
 
   return (
     <div>
       <FavoritesProvider>
-        <context.Provider value={{ page, setPage, animeId, setAnimeId, animeName, setAnimeName, animeImage, setAnimeImage, animeEnded, setAnimeEnded }}>
+        <context.Provider value={{ page, setPage, animeId, setAnimeId, animeName, setAnimeName, animeImage, setAnimeImage, animeMaxEps, setAnimeMaxEps, animeEnded, setAnimeEnded }}>
           <NavBar />
           {page === 'search' && <MediaFinder />}
           {page === 'episodes' && <EpisodeSelector />}

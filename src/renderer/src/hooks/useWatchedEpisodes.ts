@@ -29,7 +29,7 @@ export function useWatchedEpisodes(animeId: string) {
 
     const currentAnime = info[animeId] || {}
 
-    currentAnime[episodeId] = false
+    delete currentAnime[episodeId]
     info[animeId] = currentAnime
 
     localStorage.setItem('watched_episodes', JSON.stringify(info))
@@ -37,5 +37,11 @@ export function useWatchedEpisodes(animeId: string) {
     setWatched(currentAnime)
   }
 
-  return { watched, markWatched, markUnwatch }
+  const getLatestWatched = () => {
+    console.table(watched)
+    const watchedEpisodes = Object.keys(watched).map(Number);
+    return watchedEpisodes.length > 0 ? Math.max(...watchedEpisodes) : 0;
+  };
+
+  return { watched, markWatched, markUnwatch, getLatestWatched }
 }

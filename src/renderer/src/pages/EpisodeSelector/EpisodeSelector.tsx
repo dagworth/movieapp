@@ -8,15 +8,16 @@ import styles from './EpisodeSelector.module.css'
 import { useFavorites } from '@renderer/hooks/useFavorites'
 
 export function EpisodeSelector() {
-  const { animeId, animeName, animeImage, animeEnded, setPage } = useContext(context)
+  const { animeId, animeName, animeImage, animeMaxEps, animeEnded, setPage } = useContext(context)
   const [animeEpisodes, setAnimeEpisodes] = useState<any>([])
   const [logview, setLogView] = useState<boolean>(true)
   const { watched, markWatched, markUnwatch } = useWatchedEpisodes(animeId!)
   const { favorite, toggleFavorite } = useFavorites({
     id: animeId!,
     name: animeName!,
-    ended: animeEnded,
-    image: animeImage
+    max_episodes: animeMaxEps,
+    image: animeImage,
+    ended: animeEnded
   });
 
   useEffect(() => {

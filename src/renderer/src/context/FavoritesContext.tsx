@@ -1,9 +1,9 @@
 import { createContext, useState, useEffect } from 'react';
 
-// Define the shape of the data you want to store
 export interface ShowDetails {
   id: string;
   name: string;
+  max_episodes: number;
   ended: boolean;
   image: string;
 }

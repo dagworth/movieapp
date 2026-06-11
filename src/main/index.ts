@@ -4,10 +4,15 @@ import { is } from '@electron-toolkit/utils'
 import { getEpisodesList, searchAnime, getEpisodeData } from './allanime'
 import { spawn } from 'child_process'
 
+const iconPath = app.isPackaged 
+  ? join(process.resourcesPath, 'icon.ico') 
+  : join(__dirname, '../../resources/icon.ico')
+
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
     width: 900,
-    height: 670,
+    height: 1300,
+    icon: iconPath,
     show: false,
     autoHideMenuBar: true,
     webPreferences: {

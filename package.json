@@ -18,6 +18,25 @@
     "build:mac": "electron-vite build && electron-builder --mac",
     "build:linux": "electron-vite build && electron-builder --linux"
   },
+  "build": {
+    "productName": "animpv",
+    "appId": "animpv.app",
+    "extraResources": [
+      {
+        "from": "resources/",
+        "to": "resources/",
+        "filter": ["**/*"]
+      }
+    ],
+    "win": {
+      "icon": "resources/icon.ico",
+      "target": "nsis"
+    },
+    "linux": {
+      "icon": "resources/icon.jpg",
+      "target": "AppImage"
+    }
+  },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.2",
     "@electron-toolkit/utils": "^4.0.0",

@@ -4,7 +4,7 @@ import styles from './AnimeBox.module.css'
 
 export function AnimeBox({ anime }) {
   const [imgSrc, setImgSrc] = useState(anime.thumbnail)
-  const { setPage, setAnimeId, setAnimeName, setAnimeEnded, setAnimeImage } = useContext(context)
+  const { setPage, setAnimeId, setAnimeName, setAnimeEnded, setAnimeMaxEps, setAnimeImage } = useContext(context)
   const isMovie = anime.availableEpisodes.sub == 1 && anime.episodeCount == 1;
 
   useEffect(() => {
@@ -19,6 +19,7 @@ export function AnimeBox({ anime }) {
     setAnimeId(anime._id)
     setAnimeName(anime.name)
     setAnimeImage(imgSrc)
+    setAnimeMaxEps(anime.episodeCount)
     setAnimeEnded(anime.episodeCount == anime.lastEpisodeInfo.sub.episodeString)
     setPage('episodes')
   }
