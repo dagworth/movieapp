@@ -8,10 +8,10 @@
 
 .episodeButton {
   background-color: #2f5550;
-  font-size: 20px;
+  font-size: 1rem;
   color: #c1c1c1;
   border: none;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
@@ -21,7 +21,7 @@
 
 .starButton {
   background-color: #2f5550;
-  font-size: 35px;
+  font-size: 25px;
   color: #c1c1c1;
   border: none;
   padding: 0 5px;
@@ -39,7 +39,7 @@
   align-self: center;
 
   background-color: #2f5550;
-  font-size: 20px;
+  font-size: 15px;
   color: #c1c1c1;
   border: none;
   padding: 6px 6px;
@@ -56,10 +56,10 @@
   align-self: center;
 
   background-color: #2f5550;
-  font-size: 20px;
+  font-size: 1rem;
   color: #c1c1c1;
   border: none;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
@@ -90,7 +90,7 @@
 
 .title {
   color: #c1c1c1;
-  font-size: 2.25rem;
+  font-size: 1.75rem;
   font-weight: bold;
   text-align: center;
 }

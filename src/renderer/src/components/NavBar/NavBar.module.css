@@ -12,10 +12,10 @@
 
 .button {
   background-color: #2f5550;
-  font-size: 20px;
+  font-size: 1rem;
   color: #c1c1c1;
   border: none;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
